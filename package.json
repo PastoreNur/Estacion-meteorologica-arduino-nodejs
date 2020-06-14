@@ -1,0 +1,26 @@
+{
+  "name": "estacion-meteorologica-arduino-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PastoreNur/Estacion-meteorologica-arduino-nodejs.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PastoreNur/Estacion-meteorologica-arduino-nodejs/issues"
+  },
+  "homepage": "https://github.com/PastoreNur/Estacion-meteorologica-arduino-nodejs#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "mongoose": "^5.9.18",
+    "nodemon": "^2.0.4",
+    "serialport": "^9.0.0"
+  }
+}
