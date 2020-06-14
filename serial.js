@@ -12,9 +12,37 @@ port.on('open', function(){
 })
 
 parser2.on('data', function(data){
-    
-    console.log( data.toString() + " Nodejs ")
+
+    const datos = data.toString();
+    const arreglodatos = datos.split(",");
+    const entrada = {}
+    for (let index = 0; index < arreglodatos.length; index++) {
+        const element = arreglodatos[index];
+        const dato = element.split(" ")
+
+        switch (dato[0]) {
+            case "Humedad:":
+                entrada.humedad = dato[1]
+                break;
+            case "Temperatura:":
+                entrada.temperatura = dato[1]
+                break;
+            case "Presion:":
+                entrada.presion = dato[1]
+                break;
+            case "Luz:":
+                entrada.luz = dato[1]
+                break;
+            case "Viento:":
+                entrada.viento = dato[1]
+                break;
+            default:
+                break;
+        }
+
+        
+        
+    }
+    console.log(entrada);
 
 })
-  
- 
