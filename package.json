@@ -7,6 +7,9 @@
     "start": "nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "nodemonConfig": {
+      "ignore": ["./entradas.json"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PastoreNur/Estacion-meteorologica-arduino-nodejs.git"

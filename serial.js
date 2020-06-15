@@ -1,10 +1,10 @@
 const SerialPort = require('serialport')
 const Delimiter = require('@serialport/parser-delimiter')
-const Readline = SerialPort.parsers.Readline
-const parser = new Readline()
+const jsoncon = require('./jsoncontroller.js')
 const port = new SerialPort('COM5', {
     baudRate: 9600
   })
+var fecha = new Date();
 const parser2 = port.pipe(new Delimiter({ delimiter: '\r' }))
 
 port.on('open', function(){
@@ -39,10 +39,12 @@ parser2.on('data', function(data){
             default:
                 break;
         }
-
-        
+  
         
     }
-    console.log(entrada);
 
-})
+    entrada.time = {Dia : fecha.getDate(),Mes:(fecha.getMonth()+1), anio: fecha.getFullYear(),hora: fecha.getHours(), minutos: fecha.getMinutes(), segundos: fecha.getSeconds()}
+    console.log(entrada)
+    jsoncon.escribir(entrada)
+
+}) 
