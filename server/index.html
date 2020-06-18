@@ -147,10 +147,10 @@
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="/socket.io/socket.io.js" charset="utf-8"></script>
   <script>
-      const socket = io();
-
-var ctx = document.getElementById('chartBig1').getContext('2d');
-var chart = new Chart(ctx, {
+    
+  const socket = io();
+  var ctx = document.getElementById('chartBig1').getContext('2d');
+  var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
 
