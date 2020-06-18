@@ -14,7 +14,6 @@ const port = new SerialPort("COM5", {
   baudRate: 9600,
 });
 
-var fecha = new Date();
 const parser2 = port.pipe(new Delimiter({ delimiter: "\r" }));
 
 port.on("open", function () {
@@ -52,16 +51,17 @@ parser2.on("data", function (data) {
       default:
         break;
     }
+    var fecha = new Date();
+    entrada.time = {
+      Dia: fecha.getDate(),
+      Mes: fecha.getMonth() + 1,
+      anio: fecha.getFullYear(),
+      hora: fecha.getHours(),
+      minutos: fecha.getMinutes(),
+      segundos: fecha.getSeconds(),
+    };
   }
 
-  entrada.time = {
-    Dia: fecha.getDate(),
-    Mes: fecha.getMonth() + 1,
-    anio: fecha.getFullYear(),
-    hora: fecha.getHours(),
-    minutos: fecha.getMinutes(),
-    segundos: fecha.getSeconds(),
-  };
   console.log(entrada);
   io.emit("arduino:data", { value: entrada });
   jsoncon.escribir(entrada);

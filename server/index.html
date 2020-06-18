@@ -18,7 +18,7 @@
   <!-- Carga de CSS-->
   <link href="css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
  
-  <link href="esta_meteo/estacionmete.css" rel="stylesheet" />
+  <!--<link href="esta_meteo/estacionmete.css" rel="stylesheet" />-->
   
 </head>
 
@@ -95,10 +95,6 @@
               <div class="card-body">
                 <div class="chart-area"> <!--alturas y ancho-->
                   <canvas id="chartBig1"></canvas>
-                  <canvas id="chartLinePurple"></canvas>
-                  <canvas id="chartLinePurple"></canvas>
-                    <canvas id="chartLineGreen"></canvas>
-                  
                 </div>
               </div>
             </div>
@@ -147,14 +143,87 @@
   
   <!-- CONTROLA EL COLOR NEGRO DEL DASHBOARD, ESTO ES EL SCRIPT PARA CAMBIAR DE COLOR -->
   <script src="js/black-dashboard.min.js?v=1.0.0"></script>
-  <script src="esta_meteo/estacionmete.js"></script>
+  <!--<script src="esta_meteo/estacionmete.js"></script>-->
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="/socket.io/socket.io.js" charset="utf-8"></script>
   <script>
-    const socket = io();
-    socket.on("arduino:data", function (data) {
-      console.log(data);
-    });
+      const socket = io();
+
+var ctx = document.getElementById('chartBig1').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["Segundos"],
+        datasets: [{
+            label: "Temperatura",
+            backgroundColor: 'rgb(58, 93, 94)',
+            borderColor: 'rgb(41, 108, 105)',
+            data: [],
+            fill:true,
+        },{
+            label: "Humedad",
+            backgroundColor: 'rgb(52, 73, 94)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Presión atmosférica",
+            backgroundColor: 'rgb(52, 73, 94)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Intensidad luminosa",
+            backgroundColor: 'rgb(52, 73, 94)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Viento",
+            backgroundColor: 'rgb(52, 73, 94)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+let counter = 0 ;
+socket.on('arduino:data', function (dataSerial) {
+   console.log(dataSerial);
+  chart.data.labels.push(dataSerial.value.time.hora + ':' + dataSerial.value.time.minutos + ':' + dataSerial.value.time.segundos);
+  chart.data.datasets.forEach(dataset => {
+    console.log(dataset.fill);
+    switch (dataset.label) {
+      case 'Temperatura':
+        dataset.data.push(dataSerial.value.temperatura)
+        break;
+        case 'Humedad':
+        dataset.data.push(dataSerial.value.humedad)
+        break;
+        case 'Vientoo':
+        dataset.data.push(dataSerial.value.viento)
+        break;
+        case 'Intensidad luminosa':
+        dataset.data.push(dataSerial.value.luz)
+        break;
+        case 'Presión atmosférica':
+        dataset.data.push(dataSerial.value.presin)
+        break;
+      default:
+        break;
+    }
+  });
+  counter++;
+  chart.update();
+});
 
     $(document).ready(function() {
     $().ready(function() {
