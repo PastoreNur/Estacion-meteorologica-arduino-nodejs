@@ -31,8 +31,8 @@
       <div class="sidebar-wrapper">
         <div class="logo">
         
-          <a href="javascript:void(0)" class="simple-text logo-normal">
-            General
+          <a href="/" class="simple-text logo-normal">
+            Tiempo Real
           </a>
         </div>
         <ul class="nav">
@@ -115,19 +115,19 @@
         <div class="row">
 
           
-          <div class="col-lg-4">
+          <div class="col-lg-12">
             <div class="card card-chart">
 
               
               <div class="card-header">
-                <h5 class="card-category">xxxx</h5>
-                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i> 10000</h3>
+                <h5 class="card-category">Resultados</h5>
+                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i> Temperatura</h3>
               </div>
 
 
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="chartLinePurple"></canvas>
+                  <canvas id="temperaturaBarras"></canvas>
                 </div>
               </div>
             </div>
@@ -254,6 +254,56 @@
     // Configuration options go here
     options: {}
   });
+
+  //grafica de barras de temperatura
+  var ctx = document.getElementById('temperaturaBarras').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: ["Segundos"],
+        datasets: [{
+            label: "Dato1",
+            backgroundColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(41, 108, 105)',
+            data: [],
+            fill:true,
+        },{
+            label: "Dato2",
+            backgroundColor: 'rgb(0, 128, 128))',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Dato3",
+            backgroundColor: 'rgb(0, 0, 128)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Dato5",
+            backgroundColor: 'rgb(52, 73, 94)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Dato6",
+            backgroundColor: 'rgb(128, 0, 0)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+//termina grafica de barras de temperatura
+
+
 
   let counter = 0 ;
   socket.on('arduino:data', function (dataSerial) {
