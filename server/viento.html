@@ -127,7 +127,7 @@
 
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="chartLinePurple"></canvas>
+                  <canvas id="vientoBarras"></canvas>
                 </div>
               </div>
             </div>
@@ -258,7 +258,7 @@
   });
 
  //grafica de barras de viento
- var ctx = document.getElementById('presionBarras').getContext('2d');
+ var ctx = document.getElementById('vientoBarras').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
