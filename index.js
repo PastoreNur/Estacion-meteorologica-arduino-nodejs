@@ -73,8 +73,13 @@ app.get("/", (req, res, next) => {
   res.sendFile(__dirname + "/server/index.html");
 });
 app.get("/promediofecha/:Dia/:Mes/:anio", (req, res) => {
-  jsoncon.promediofecha(req.params);
+  res.json(jsoncon.promediofecha(req.params));
 });
+
+app.get("/registro", (req, res) => {
+  res.json(jsoncon.registro());
+});
+
 app.get("/temperatura.html", (req, res, next) => {
   res.sendFile(__dirname + "/server/temperatura.html");
 });
