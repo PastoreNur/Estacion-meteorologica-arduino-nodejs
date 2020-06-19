@@ -68,10 +68,13 @@ parser2.on("data", function (data) {
 });
 
 app.use(express.static(__dirname + "/server/recursos"));
+app.use("/static", express.static(__dirname));
 app.get("/", (req, res, next) => {
   res.sendFile(__dirname + "/server/index.html");
 });
-
+app.get("/promediofecha/:Dia/:Mes/:anio", (req, res) => {
+  jsoncon.promediofecha(req.params);
+});
 app.get("/temperatura.html", (req, res, next) => {
   res.sendFile(__dirname + "/server/temperatura.html");
 });

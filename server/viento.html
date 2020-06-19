@@ -225,13 +225,17 @@
   
   <!-- CONTROLA EL COLOR NEGRO DEL DASHBOARD, ESTO ES EL SCRIPT PARA CAMBIAR DE COLOR -->
   <script src="js/black-dashboard.min.js?v=1.0.0"></script>
-  <script src="esta_meteo/estacionmete.js"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="/socket.io/socket.io.js" charset="utf-8"></script>
   
 
   <script>
-   const socket = io();
+  var fecha={};
+  fecha.dia = 18;
+  fecha.mes = 6;
+  fecha.anio = 2020; 
+   
+  const socket = io();
   var ctx = document.getElementById('chartBig1').getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -262,6 +266,7 @@
   });
     counter++;
     chart.update();
+    
   });
     $(document).ready(function() {
     $().ready(function() {

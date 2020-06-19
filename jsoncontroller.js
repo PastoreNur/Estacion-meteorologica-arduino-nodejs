@@ -10,6 +10,8 @@ function escribir(params) {
 }
 //Parametro debe ser un objeto con las propiedades Dia,Mes,anio
 function buscarfecha(params) {
+  console.log(params);
+
   const porfecha = [];
   entradas.forEach((element) => {
     if (
@@ -20,6 +22,7 @@ function buscarfecha(params) {
       porfecha.push(element);
     }
   });
+
   //Retorna un arreglo de las concidencias almacenadas
   return porfecha;
 }
@@ -27,20 +30,31 @@ function buscarfecha(params) {
 //Parametro debe ser un objeto con las propiedades Dia,Mes,anio
 function promediofecha(params) {
   const fecha = buscarfecha(params);
-  var retorno;
+  var retorno = {};
+  retorno.humedad = 0;
+  retorno.tempertura = 0;
+  retorno.presion = 0;
+  retorno.luz = 0;
+  retorno.viento = 0;
+
   fecha.forEach((element) => {
+    console.log(element.humedad);
+
     retorno.humedad += element.humedad;
     retorno.tempertura += element.tempertura;
     retorno.presion += element.presion;
     retorno.luz += element.luz;
     retorno.viento += element.viento;
   });
-  retorno.humedad = retorno.humedad / fecha.length;
+
+  /*retorno.humedad = retorno.humedad / fecha.length;
   retorno.tempertura = retorno.tempertura / fecha.length;
   retorno.presion = retorno.presion / fecha.length;
   retorno.luz = retorno.luz / fecha.length;
-  retorno.viento = retorno.viento / fecha.length;
+  retorno.viento = retorno.viento / fecha.length;*/
   //Retorna un objeto con el promedio de las 5 propiedades en analisis
+  console.log(retorno);
+
   return retorno;
 }
 //Parametro debe ser un objeto con las propiedades Dia,Mes,anio,hora
