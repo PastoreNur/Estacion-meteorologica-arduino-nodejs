@@ -41,6 +41,7 @@ function promediofecha(params) {
     retorno.presion += parseFloat(element.presion);
     retorno.luz += parseFloat(element.luz);
     retorno.viento += parseFloat(element.viento);
+    retorno.time = params;
   });
   retorno.humedad = parseFloat(parseFloat(retorno.humedad) / fecha.length);
   retorno.temperatura = parseFloat(
@@ -54,8 +55,9 @@ function promediofecha(params) {
   retorno.presion = parseFloat(retorno.presion);
   retorno.luz = parseFloat(retorno.luz);
   retorno.viento = parseFloat(retorno.viento);
-
+  retorno.time = params;
   //Retorna un objeto con el promedio de las 5 propiedades en analisis
+
   return retorno;
 }
 //Parametro debe ser un objeto con las propiedades Dia,Mes,anio,hora
@@ -91,6 +93,7 @@ function promediohora(params) {
   retorno.presion = retorno.presion / fecha.length;
   retorno.luz = retorno.luz / fecha.length;
   retorno.viento = retorno.viento / fecha.length;
+
   //Retorna un objeto con el promedio de las 5 propiedades en analisis
   return retorno;
 }
@@ -123,8 +126,11 @@ function registro() {
   var retorno = [];
   for (let index = 0; index < 5; index++) {
     retorno.push(promediofecha(param));
+
     param.Dia--;
   }
+  console.log(retorno);
+
   return retorno;
 }
 

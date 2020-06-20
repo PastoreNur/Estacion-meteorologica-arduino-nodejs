@@ -232,19 +232,69 @@
   
   <script>
 
+  
     // Make a request for a user with a given ID
-  axios.get('http://localhost:3000/registro')
+    axios.get('http://localhost:3000/registro')
   .then(function (response) {
     // handle success
-    console.log(response.data);
+    let result= response.data
+    console.log(result);
+    
+    //grafica de barras de viento
+  var ctx = document.getElementById('presionBarras').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+    
+    // The data for our dataset
+    data: {
+        labels: [],
+        datasets: [{
+            label:  result[0].time.Dia + 5 + "/"+result[0].time.Mes + "/"+result[0].time.anio,
+            backgroundColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(41, 108, 105)',
+            data: [result[0].presion],
+            fill:true,
+        },{
+            label: result[1].time.Dia + 4 +"/"+result[1].time.Mes + "/"+result[1].time.anio,
+            backgroundColor: 'rgb(0, 128, 128))',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [result[1].presion],
+            fill: true,
+        },{
+            label: result[2].time.Dia +3 + "/"+result[2].time.Mes + "/"+result[2].time.anio,
+            backgroundColor: 'rgb(0, 0, 128)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [result[2].presion],
+            fill: true,
+        },{
+            label: result[3].time.Dia + 2 + "/"+result[3].time.Mes + "/"+result[3].time.anio,
+            backgroundColor: 'rgb(52, 73, 94)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [result[3].presion],
+            fill: true,
+        },{
+            label: result[4].time.Dia + 1 + "/"+result[4].time.Mes + "/"+result[4].time.anio,
+            backgroundColor: 'rgb(128, 0, 0)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [result[4].presion],
+            fill: true,
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+//termina grafica de barras de viento
+  
   })
   .catch(function (error) {
     // handle error
     console.log(error);
-  })
-  .then(function () {
-    // always executed
+    return null
   });
+  
    const socket = io();
   var ctx = document.getElementById('chartBig1').getContext('2d');
   var chart = new Chart(ctx, {
