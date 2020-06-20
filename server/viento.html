@@ -135,16 +135,16 @@
 
 
 
-          <div class="col-lg-4">
+          <div class="col-lg-12">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">xxxxx</h5>
-                <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i> 10000</h3>
+                <h5 class="card-category">Expresado en</h5>
+                <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i> Viento</h3>
               </div>
               
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="CountryChart"></canvas>
+                  <canvas id="linealviento"></canvas>
                 </div>
               </div>
             </div>
@@ -315,7 +315,31 @@
     options: {}
   });
 
- 
+ //GRAFICA LINEAL 3 DE VIWNTO
+var ctx = document.getElementById('linealviento').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["Segundos"],
+        datasets: [{
+            label: "Dato1",
+            backgroundColor: 'rgb(128, 0, 0)',
+            borderColor: 'rgb(41, 108, 105)',
+            data: [],
+            fill:true,
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+//termina grafica lineal viento
+
+
 
 
 

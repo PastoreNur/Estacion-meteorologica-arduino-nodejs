@@ -91,6 +91,8 @@
           <div class="col-12">
             <div class="card card-chart">
               <div class="card-header ">
+                <h5 class="card-category">Actualidad</h5>
+                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>Tiempo Real</h3>
               </div>
               <div class="card-body">
                 <div class="chart-area"> <!--alturas y ancho-->
@@ -101,6 +103,33 @@
           </div>
           
         </div>
+
+        <div class="row">
+
+          
+          <div class="col-lg-12">
+            <div class="card card-chart">
+
+              
+              <div class="card-header">
+                <h5 class="card-category">Resultados</h5>
+                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>Tiempo Real</h3>
+              </div>
+
+
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="tiemporeal2"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
 
       </div>
 
@@ -209,6 +238,59 @@
     // Configuration options go here
     options: {}
 });
+
+//GRAFICA DE LINEAS QUE TOME 5 INDEX
+
+
+var ctx = document.getElementById('tiemporeal2').getContext('2d');
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["Segundos"],
+        datasets: [{
+            label: "Dato1",
+            backgroundColor:'rgb(128, 0, 128)',
+            borderColor: 'rgb(41, 108, 105)',
+            data: [],
+            fill:true,
+        },{
+            label: "Dato2",
+            backgroundColor:'rgb(255, 0, 0)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Dato3",
+            backgroundColor: 'rgb(240,128,128)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Dato5",
+            backgroundColor:'rgb(255,255,0)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        },{
+            label: "Dato6",
+            backgroundColor: 'rgb(50,205,50)',
+            borderColor: 'rgb(41, 128, 185)',
+            data: [],
+            fill: true,
+        }
+      ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+//termina grafica DEL INDEX 2
+
+
+
 
 let counter = 0 ;
 socket.on('arduino:data', function (dataSerial) {
