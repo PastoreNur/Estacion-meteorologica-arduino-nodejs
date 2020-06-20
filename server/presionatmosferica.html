@@ -227,17 +227,24 @@
   <script src="js/black-dashboard.min.js?v=1.0.0"></script>
   <script src="esta_meteo/estacionmete.js"></script>
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
-
-  
-
-
-
   <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
   
-
-
-
   <script>
+
+    // Make a request for a user with a given ID
+  axios.get('http://localhost:3000/registro')
+  .then(function (response) {
+    // handle success
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
    const socket = io();
   var ctx = document.getElementById('chartBig1').getContext('2d');
   var chart = new Chart(ctx, {
