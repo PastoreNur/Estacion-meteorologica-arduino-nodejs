@@ -62,6 +62,8 @@ function promediofecha(params) {
 }
 //Parametro debe ser un objeto con las propiedades Dia,Mes,anio,hora
 function buscarhora(params) {
+  console.log(params);
+
   const porhora = [];
   entradas.forEach((element) => {
     if (
@@ -80,19 +82,34 @@ function buscarhora(params) {
 //Parametro debe ser un objeto con las propiedades Dia,Mes,anio,hora
 function promediohora(params) {
   const fecha = buscarhora(params);
-  var retorno;
+  var retorno = {};
+  retorno.humedad = 0;
+  retorno.temperatura = 0;
+  retorno.presion = 0;
+  retorno.luz = 0;
+  retorno.viento = 0;
+
   fecha.forEach((element) => {
-    retorno.humedad += element.humedad;
-    retorno.tempertura += element.tempertura;
-    retorno.presion += element.presion;
-    retorno.luz += element.luz;
-    retorno.viento += element.viento;
+    retorno.humedad += parseFloat(element.humedad);
+    retorno.temperatura += parseFloat(element.temperatura);
+    retorno.presion += parseFloat(element.presion);
+    retorno.luz += parseFloat(element.luz);
+    retorno.viento += parseFloat(element.viento);
+    retorno.time = params;
   });
-  retorno.humedad = retorno.humedad / fecha.length;
-  retorno.tempertura = retorno.tempertura / fecha.length;
-  retorno.presion = retorno.presion / fecha.length;
-  retorno.luz = retorno.luz / fecha.length;
-  retorno.viento = retorno.viento / fecha.length;
+  retorno.humedad = parseFloat(parseFloat(retorno.humedad) / fecha.length);
+  retorno.temperatura = parseFloat(
+    parseFloat(retorno.temperatura) / fecha.length
+  );
+  retorno.presion = parseFloat(parseFloat(retorno.presion) / fecha.length);
+  retorno.luz = parseFloat(parseFloat(retorno.luz) / fecha.length);
+  retorno.viento = parseFloat(parseFloat(retorno.viento) / fecha.length);
+  retorno.humedad = parseFloat(retorno.humedad);
+  retorno.temperatura = parseFloat(retorno.temperatura);
+  retorno.presion = parseFloat(retorno.presion);
+  retorno.luz = parseFloat(retorno.luz);
+  retorno.viento = parseFloat(retorno.viento);
+  retorno.time = params;
 
   //Retorna un objeto con el promedio de las 5 propiedades en analisis
   return retorno;
@@ -134,6 +151,25 @@ function registro() {
   return retorno;
 }
 
+function registrohora() {
+  var fecha = new Date();
+  var param = {
+    Dia: fecha.getDate(),
+    Mes: fecha.getMonth() + 1,
+    anio: fecha.getFullYear(),
+    hora: fecha.getHours(),
+  };
+  var retorno = [];
+  for (let index = 0; index < 12; index++) {
+    retorno.push(promediohora(param));
+
+    param.hora--;
+  }
+  console.log(retorno);
+
+  return retorno;
+}
+
 //Dos parametros de fecha deben ser objetos con las propiedades Dia,Mes,anio
 function promediorango(inicial, final) {
   const fecha = buscarrango(inicial, final);
@@ -163,4 +199,5 @@ module.exports = {
   buscarrango,
   promediorango,
   registro,
+  registrohora,
 };

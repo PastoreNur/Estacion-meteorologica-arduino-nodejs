@@ -80,6 +80,10 @@ app.get("/registro", (req, res) => {
   res.json(jsoncon.registro());
 });
 
+app.get("/registrohora", (req, res) => {
+  res.json(jsoncon.registrohora());
+});
+
 app.get("/temperatura.html", (req, res, next) => {
   res.sendFile(__dirname + "/server/temperatura.html");
 });

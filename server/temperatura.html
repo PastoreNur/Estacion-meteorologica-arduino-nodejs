@@ -294,10 +294,59 @@
     console.log(error);
     return null
   });
+  axios.get('http://localhost:3000/registrohora')
+    .then(function (response) {
+    // handle success
+    let result= response.data
+    console.log(result);
+  //GRAFICA LINEAL 3 DE HUMEDAD
+   var ctx1 = document.getElementById('linealtemperatura').getContext('2d');
+   var chart1 = new Chart(ctx1, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["Horas"],
+        datasets: [{
+            label: "",
+            backgroundColor: 'rgb(128, 0, 0)',
+            borderColor: 'rgb(41, 108, 105)',
+            data: [0],
+            fill:true,
+        }
+      ]
+    },
+    // Configuration options go here
+    options: {}
+    });
+  //termina grafica lineal humedad
+    chart1.data.datasets[0].data.push(0)
+    counter = 1
+    result.reverse().forEach(element => {
+      console.log(chart1.data.labels);
+      if (element.humedad == null) {
+        chart1.data.datasets[0].data.push(0)
+      }else{
+        chart1.data.datasets[0].data.push(element.temperatura)
+      }
+      
+      chart1.data.labels.push(element.time.hora+counter)
+      counter++
+      
+    });
+    chart1.update()
+  //termina grafica de barras de viento
   
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    return null
+  });
    const socket = io();
-  var ctx = document.getElementById('chartBig1').getContext('2d');
-  var chart = new Chart(ctx, {
+  var ctxs = document.getElementById('chartBig1').getContext('2d');
+  var charts = new Chart(ctxs, {
     // The type of chart we want to create
     type: 'line',
     // The data for our dataset
@@ -307,7 +356,7 @@
             label: "Temperatura",
             backgroundColor: 'rgb(52, 73, 94)',
             borderColor: 'rgb(41, 128, 185)',
-            data: [],
+            data: [0],
             fill: true,
         }
       ]
