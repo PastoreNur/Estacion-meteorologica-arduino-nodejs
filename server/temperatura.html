@@ -19,6 +19,7 @@
   <link href="css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
  
   <link href="esta_meteo/estacionmete.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   
 </head>
 
@@ -153,16 +154,20 @@
 
 
 
-          <div class="col-lg-4">
+          <div class="col-lg-12">
+            <div id="rangotemperatura"  style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50%">
+              <i class="fa fa-calendar"></i>&nbsp;
+              <span></span> <i class="fa fa-caret-down"></i>
+           </div>
 
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">Nombre</h5>
-                <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> 10000</h3>
+                <h5 class="card-category">Rango de fechas</h5>
+                <h3 class="card-title"><i class="tim-icons icon-send text-success"></i>Rango de Temperatura</h3>
               </div>
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="chartLineGreen"></canvas>
+                  <canvas id="temperaturadate"></canvas>
                 </div>
               </div>
             </div>
@@ -229,6 +234,14 @@
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script src="/socket.io/socket.io.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<!-- CALL DEL DATEPICKER-->
+  
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  
+
   
   <script>
 
@@ -437,6 +450,68 @@ var ctx = document.getElementById('linealtemperatura').getContext('2d');
     options: {}
 });
 //termina grafica lineal luminosa
+
+//AQUÍ EL SCRIPT DEL DATE PICKER**************
+
+
+$(function() {
+
+var start = moment().subtract(29, 'days');
+var end = moment();
+
+function cb(start, end) {
+    $('#rangotemperatura span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+}
+
+$('#rangotemperatura').daterangepicker({
+    startDate: start,
+    endDate: end,
+    ranges: {
+       'Hoy': [moment(), moment()],
+       'Ayer': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+       'Hace 7 días': [moment().subtract(6, 'days'), moment()],
+       'Últimos 30 días': [moment().subtract(29, 'days'), moment()],
+       'Este mes': [moment().startOf('month'), moment().endOf('month')],
+       'Mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    }
+}, cb);
+
+cb(start, end);
+
+});
+
+
+
+//FIN DEL DATEPICKER**************************
+//GRAFICA DEL DATEPICKER
+
+var ctx1 = document.getElementById('temperaturadate').getContext('2d');
+   var chart1 = new Chart(ctx1, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["Horas"],
+        datasets: [{
+            label: "",
+            backgroundColor: 'rgb(128, 0, 0)',
+            borderColor: 'rgb(41, 108, 105)',
+            data: [0],
+            fill:true,
+        }
+      ]
+    },
+       // Configuration options go here
+       options: {}
+    });
+ 
+
+//FIN DE LA GRAFICA DEL DATEPICKER
+
+
+
+
 
 
 
