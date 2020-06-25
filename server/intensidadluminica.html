@@ -19,7 +19,7 @@
   <link href="css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
  
   <link href="esta_meteo/estacionmete.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  
   
 </head>
 
@@ -240,8 +240,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-      
+   
   
   
   <script>
@@ -299,7 +298,28 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
 });
 //termina grafica de barras de viento
   
@@ -334,7 +354,28 @@
       ]
     },
     // Configuration options go here
-    options: {}
+    options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
     });
   //termina grafica lineal humedad
 
@@ -390,7 +431,28 @@ var ctx1 = document.getElementById('luminosodate').getContext('2d');
       ]
     },
        // Configuration options go here
-       options: {}
+       options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
     });
  
 
@@ -445,7 +507,28 @@ var ctx1 = document.getElementById('luminosodate').getContext('2d');
     },
 
     // Configuration options go here
-    options: {}
+    options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
   });
 
 
@@ -493,7 +576,28 @@ var ctx = document.getElementById('luminosaBarras').getContext('2d');
     },
 
     // Configuration options go here
-    options: {}
+    options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
 });
 //termina grafica de barras de luminica
 
@@ -517,7 +621,28 @@ var ctx = document.getElementById('linealluminosa').getContext('2d');
     },
 
     // Configuration options go here
-    options: {}
+    options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
 });
 //termina grafica lineal luminosa
 

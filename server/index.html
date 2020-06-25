@@ -236,7 +236,30 @@
     },
 
     // Configuration options go here
-    options: {}
+    options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
+
+  
 });
 
 axios
@@ -294,7 +317,28 @@ axios
       },
 
       // Configuration options go here
-      options: {},
+      options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
     });
     counter = 1;
     result.reverse().forEach((element) => {
