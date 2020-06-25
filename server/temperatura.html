@@ -275,7 +275,7 @@
             data: [result[1].temperatura],
             fill: true,
         },{
-            label: result[2].time.Dia +3 + "/"+result[2].time.Mes + "/"+result[2].time.anio,
+            label: result[2].time.Dia + 3 + "/"+result[2].time.Mes + "/"+result[2].time.anio,
             backgroundColor: 'rgb(0, 0, 128)',
             borderColor: 'rgb(41, 128, 185)',
             data: [result[2].temperatura],
@@ -461,6 +461,18 @@ var end = moment();
 
 function cb(start, end) {
     $('#rangotemperatura span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    console.log(start.format('DD/MM/YYYY'));
+    axios.get('http://localhost:3000/promedioRango/'+start.format('DD/MM/YYYY')+"/"+end.format('DD/MM/YYYY'))
+    .then(function (response) {
+    // handle success
+
+  
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    return null
+  });    
 }
 
 $('#rangotemperatura').daterangepicker({
@@ -479,8 +491,6 @@ $('#rangotemperatura').daterangepicker({
 cb(start, end);
 
 });
-
-
 
 //FIN DEL DATEPICKER**************************
 //GRAFICA DEL DATEPICKER

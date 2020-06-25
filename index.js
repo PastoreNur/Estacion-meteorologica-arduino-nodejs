@@ -76,6 +76,10 @@ app.get("/promediofecha/:Dia/:Mes/:anio", (req, res) => {
   res.json(jsoncon.promediofecha(req.params));
 });
 
+app.get("/promedioRango/:Diai/:Mesi/:anioi/:Diaf/:Mesf/:aniof", (req, res) => {
+  res.json(jsoncon.promediorango(req.params));
+});
+
 app.get("/registro", (req, res) => {
   res.json(jsoncon.registro());
 });

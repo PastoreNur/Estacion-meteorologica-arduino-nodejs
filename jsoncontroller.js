@@ -62,8 +62,6 @@ function promediofecha(params) {
 }
 //Parametro debe ser un objeto con las propiedades Dia,Mes,anio,hora
 function buscarhora(params) {
-  console.log(params);
-
   const porhora = [];
   entradas.forEach((element) => {
     if (
@@ -117,15 +115,18 @@ function promediohora(params) {
 //Dos parametros de fecha deben ser objetos con las propiedades Dia,Mes,anio
 function buscarrango(inicial, final) {
   const porrango = [];
+
   entradas.forEach((element) => {
     if (
       element.time.Dia >= inicial.Dia &&
       element.time.Dia <= final.Dia &&
       element.time.Mes >= inicial.Mes &&
-      element.time.Mes <= final.mes &&
+      element.time.Mes <= final.Mes &&
       element.time.anio >= inicial.anio &&
       element.time.anio <= final.anio
     ) {
+      console.log(element);
+
       porrango.push(element);
     }
   });
@@ -146,7 +147,6 @@ function registro() {
 
     param.Dia--;
   }
-  console.log(retorno);
 
   return retorno;
 }
@@ -165,28 +165,26 @@ function registrohora() {
 
     param.hora--;
   }
-  console.log(retorno);
 
   return retorno;
 }
 
 //Dos parametros de fecha deben ser objetos con las propiedades Dia,Mes,anio
-function promediorango(inicial, final) {
-  const fecha = buscarrango(inicial, final);
-  var retorno;
-  fecha.forEach((element) => {
-    retorno.humedad += element.humedad;
-    retorno.tempertura += element.tempertura;
-    retorno.presion += element.presion;
-    retorno.luz += element.luz;
-    retorno.viento += element.viento;
-  });
-  retorno.humedad = retorno.humedad / fecha.length;
-  retorno.tempertura = retorno.tempertura / fecha.length;
-  retorno.presion = retorno.presion / fecha.length;
-  retorno.luz = retorno.luz / fecha.length;
-  retorno.viento = retorno.viento / fecha.length;
-  //Retorna un objeto con el promedio de las 5 propiedades en analisis
+function promediorango(rango) {
+  var inicial = {};
+  inicial.Dia = rango.Mesi;
+  inicial.Mes = rango.Diai;
+  inicial.anio = rango.anioi;
+
+  var final = {};
+  final.Dia = rango.Mesf;
+  final.Mes = rango.Diaf;
+  final.anio = rango.aniof;
+
+  console.log(promediofecha(inicial));
+
+  var retorno = [];
+
   return retorno;
 }
 
