@@ -94,7 +94,16 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="row">
+          <h1></h1>
           <div class="col-12">
+          <!--AQUI ESTA EL BOTON -->
+            <form action="">
+              <label for="quantity">Configuración de Alarma:</label>
+              <input type="number" id="rang" name="rang" min="1" max="100">
+              <button onclick="PoneAquiLaFunction()">Establecer Alarma</button>
+             
+            </form> 
+            <!-- HASTA ACA LLEGA EL EVENTO DEL BOTON-->
             <div class="card card-chart">
               <div class="card-header ">
 
@@ -186,6 +195,7 @@
 
 
       <footer class="footer">
+       
         <div class="container-fluid">
           <ul class="nav">
             <li class="nav-item">
@@ -244,7 +254,58 @@
   
   <script>
 
+  //SCRIPT RELOJ
+$(function(){
+  var actualizarHora = function(){
+    var fecha = new Date(),
+        hora = fecha.getHours(),
+        minutos = fecha.getMinutes(),
+        segundos = fecha.getSeconds(),
+        diaSemana = fecha.getDay(),
+        dia = fecha.getDate(),
+        mes = fecha.getMonth(),
+        anio = fecha.getFullYear(),
+        ampm;
+    
+    var $pHoras = $("#hour"),
+        $pSegundos = $("#segundos"),
+        $pMinutos = $("#minutos"),
+        $pAMPM = $("#ampm"),
+        $pDiaSemana = $("#diaSemana"),
+        $pDia = $("#dia"),
+        $pMes = $("#mes"),
+        $pAnio = $("#anio");
+    var semana = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+    var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    
+    $pDiaSemana.text(semana[diaSemana]);
+    $pDia.text(dia);
+    $pMes.text(meses[mes]);
+    $pAnio.text(anio);
+    if(hora>=12){
+      hora = hora - 12;
+      ampm = "PM";
+    }else{
+      ampm = "AM";
+    }
+    if(hora == 0){
+      hora = 12;
+    }
+    if(hora<10){$pHoras.text("0"+hora)}else{$pHoras.text(hora)};
+    if(minutos<10){$pMinutos.text("0"+minutos)}else{$pMinutos.text(minutos)};
+    if(segundos<10){$pSegundos.text("0"+segundos)}else{$pSegundos.text(segundos)};
+    $pAMPM.text(ampm);
+    
+  };
   
+  
+  actualizarHora();
+  var intervalo = setInterval(actualizarHora,1000);
+});
+
+
+
+
     // Make a request for a user with a given ID
     axios.get('http://localhost:3000/registro')
   .then(function (response) {
