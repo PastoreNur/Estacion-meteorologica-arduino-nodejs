@@ -1,6 +1,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -199,6 +201,10 @@
     type: 'line',
 
     // The data for our dataset
+
+
+
+
     data: {
         labels: ["Segundos"],
         datasets: [{
@@ -234,6 +240,9 @@
         }
       ]
     },
+
+
+    
 
     // Configuration options go here
     options: { 
@@ -351,7 +360,7 @@ axios
           if (element.temperatura == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.temperatura);
+            dataset.data.push(Math.round(element.temperatura*100)/100);
           }
           chart1.update();
           break;
@@ -359,7 +368,8 @@ axios
         if (element.humedad == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.humedad);
+            dataset.data.push(Math.round(element.humedad*100)/100);
+            
           }
           chart1.update();
           break;
@@ -367,7 +377,8 @@ axios
         if (element.viento == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.viento);
+            dataset.data.push(Math.round(element.viento*100)/100);
+            
           }
           chart1.update();
           break;
@@ -375,7 +386,8 @@ axios
         if (element.luz == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.luz);
+            dataset.data.push(Math.round(element.luz*100)/100);
+            
           }
           chart1.update();
           break;
@@ -383,7 +395,8 @@ axios
         if (element.presion == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.presion);
+            dataset.data.push(Math.round(element.presion*100)/100);
+           
           }
           chart1.update();
           break;
