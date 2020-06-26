@@ -1,6 +1,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -258,41 +260,49 @@
     type: 'bar',
     
     // The data for our dataset
+
+
+
+
     data: {
         labels: [],
         datasets: [{
             label:  result[0].time.Dia + 5 + "/"+result[0].time.Mes + "/"+result[0].time.anio,
             backgroundColor: 'rgb(255, 0, 0)',
             borderColor: 'rgb(41, 108, 105)',
-            data: [result[0].luz],
+            data: [Math.round(result[0].luz*100)/100],
             fill:true,
         },{
             label: result[1].time.Dia + 4 +"/"+result[1].time.Mes + "/"+result[1].time.anio,
             backgroundColor: 'rgb(0, 128, 128))',
             borderColor: 'rgb(41, 128, 185)',
-            data: [result[1].luz],
+            data: [Math.round(result[1].luz*100)/100],
             fill: true,
         },{
             label: result[2].time.Dia +3 + "/"+result[2].time.Mes + "/"+result[2].time.anio,
             backgroundColor: 'rgb(0, 0, 128)',
             borderColor: 'rgb(41, 128, 185)',
-            data: [result[2].luz],
+            data: [Math.round(result[2].luz*100)/100],
             fill: true,
         },{
             label: result[3].time.Dia + 2 + "/"+result[3].time.Mes + "/"+result[3].time.anio,
             backgroundColor: 'rgb(52, 73, 94)',
             borderColor: 'rgb(41, 128, 185)',
-            data: [result[3].luz],
+            data: [Math.round(result[3].luz*100)/100],
             fill: true,
         },{
             label: result[4].time.Dia + 1 + "/"+result[4].time.Mes + "/"+result[4].time.anio,
             backgroundColor: 'rgb(128, 0, 0)',
             borderColor: 'rgb(41, 128, 185)',
-            data: [result[4].luz],
+            data: [Math.round(result[4].luz*100)/100],
             fill: true,
         }
       ]
     },
+
+
+
+
 
     // Configuration options go here
     options: { 
@@ -546,75 +556,8 @@ cb(start, end);
     }
   });
 
-
-//grafica de barras de luminica 
-var ctx = document.getElementById('luminosaBarras').getContext('2d');
-  var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-
-    // The data for our dataset
-    data: {
-        labels: ["Segundos"],
-        datasets: [{
-            label: "Dato1",
-            backgroundColor: 'rgb(255, 0, 0)',
-            borderColor: 'rgb(41, 108, 185)',
-            data: [],
-            fill:true,
-        },{
-            label: "Dato2",
-            backgroundColor: 'rgb(0, 128, 128))',
-            borderColor: 'rgb(41, 128, 185)',
-            data: [],
-            fill: true,
-        },{
-            label: "Dato3",
-            backgroundColor: 'rgb(0, 0, 128)',
-            borderColor: 'rgb(41, 128, 185)',
-            data: [],
-            fill: true,
-        },{
-            label: "Dato5",
-            backgroundColor: 'rgb(52, 73, 94)',
-            borderColor: 'rgb(41, 128, 185)',
-            data: [],
-            fill: true,
-        },{
-            label: "Dato6",
-            backgroundColor: 'rgb(128, 0, 0)',
-            borderColor: 'rgb(41, 128, 185)',
-            data: [],
-            fill: true,
-        }
-      ]
-    },
-
-    // Configuration options go here
-    options: { 
-        legend: {
-            labels: {
-                fontColor: "white",
-               
-            }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "white",
-                    
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: "white",
-                  
-                }
-            }]
-        }
-    }
-});
 //termina grafica de barras de luminica
+
 
 //GRAFICA LINEAL 3 DE VIWNTO
 var ctx = document.getElementById('linealluminosa').getContext('2d');
