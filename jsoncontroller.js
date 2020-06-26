@@ -151,19 +151,24 @@ function registro() {
   return retorno;
 }
 
+Date.prototype.subHours = function (hours) {
+  var date = new Date(this.valueOf());
+  date.setHours(date.getHours() - hours);
+  return date;
+};
+
 function registrohora() {
   var fecha = new Date();
-  var param = {
-    Dia: fecha.getDate(),
-    Mes: fecha.getMonth() + 1,
-    anio: fecha.getFullYear(),
-    hora: fecha.getHours(),
-  };
+
   var retorno = [];
   for (let index = 0; index < 12; index++) {
+    var param = {
+      Dia: fecha.subHours(index).getDate(),
+      Mes: fecha.subHours(index).getMonth(),
+      anio: fecha.subHours(index).getFullYear(),
+      hora: fecha.subHours(index).getHours(),
+    };
     retorno.push(promediohora(param));
-
-    param.hora--;
   }
 
   return retorno;
