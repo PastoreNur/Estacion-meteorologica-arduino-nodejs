@@ -25,13 +25,18 @@
 </head>
 
 <body class="">
+  
   <div class="wrapper">
     <div class="sidebar">
+      
+      
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
+          
+
         
           <a href="javascript:void(0)" class="simple-text logo-normal">
             Live
@@ -69,14 +74,17 @@
               <p>Viento</p>
             </a>
           </li>
+          
          
         </ul>
+        
       </div>
     </div>
 
      <!-- PANEL PEINCIPAL -->
 
     <div class="main-panel">
+      
      
       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
         <div class="container-fluid">
@@ -88,14 +96,25 @@
 
       
       <!-- End Navbar -->
+     
+
       <div class="content">
+        
+      
+  
+       
         <div class="row">
+          
+          <h1>Estación Meteorológica MIP115</h1>
           <div class="col-12">
+            
             <div class="card card-chart">
               <div class="card-header ">
                 <h5 class="card-category">Actualidad</h5>
                 <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>Tiempo Real</h3>
+                
               </div>
+              
               <div class="card-body">
                 <div class="chart-area"> <!--alturas y ancho-->
                   <canvas id="chartBig1"></canvas>
@@ -136,15 +155,32 @@
       </div>
 
       <footer class="footer">
-        <div class="container-fluid">
-          <ul class="nav">
-            <li class="nav-item">
-              <a href="javascript:void(0)" class="nav-link">
-                Estación Meteorológica
-              </a>
-            </li>
+        <div class="contenedor">
+          <div class="widget">
+            <div class="fecha">
+              <p id="diaSemana" class="diaSemana"></p>
+              <p id="dia" class="dia"></p>
+              <p>de</p>
+              <p id="mes" class="mes"></p>
+              <p>del</p>
+              <p id="anio" class="anio"></p>
+              <p>/</p>
+             <p id="hour" class="hour"></p>
+              <p>:</p>
+              <p id="minutos" class="minutos"></p>
+              <p>:</p>
+              <p id="segundos" class="segundos"></p>
+                <p id="ampm" class="ampm"></p>
+               
+            
            
-          </ul>
+          </div>
+        </div>
+       
+        
+        <div class="container-fluid">
+         
+      
           <div class="copyright">
             ©
             <script>
@@ -180,6 +216,59 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
   
   <script>
+//reloj 
+$(function(){
+  var actualizarHora = function(){
+    var fecha = new Date(),
+        hora = fecha.getHours(),
+        minutos = fecha.getMinutes(),
+        segundos = fecha.getSeconds(),
+        diaSemana = fecha.getDay(),
+        dia = fecha.getDate(),
+        mes = fecha.getMonth(),
+        anio = fecha.getFullYear(),
+        ampm;
+    
+    var $pHoras = $("#hour"),
+        $pSegundos = $("#segundos"),
+        $pMinutos = $("#minutos"),
+        $pAMPM = $("#ampm"),
+        $pDiaSemana = $("#diaSemana"),
+        $pDia = $("#dia"),
+        $pMes = $("#mes"),
+        $pAnio = $("#anio");
+    var semana = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+    var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    
+    $pDiaSemana.text(semana[diaSemana]);
+    $pDia.text(dia);
+    $pMes.text(meses[mes]);
+    $pAnio.text(anio);
+    if(hora>=12){
+      hora = hora - 12;
+      ampm = "PM";
+    }else{
+      ampm = "AM";
+    }
+    if(hora == 0){
+      hora = 12;
+    }
+    if(hora<10){$pHoras.text("0"+hora)}else{$pHoras.text(hora)};
+    if(minutos<10){$pMinutos.text("0"+minutos)}else{$pMinutos.text(minutos)};
+    if(segundos<10){$pSegundos.text("0"+segundos)}else{$pSegundos.text(segundos)};
+    $pAMPM.text(ampm);
+    
+  };
+  
+  
+  actualizarHora();
+  var intervalo = setInterval(actualizarHora,1000);
+});
+
+
+
+
+
 
     // Make a request for a user with a given ID
   axios.get('http://localhost:3000/registro')
