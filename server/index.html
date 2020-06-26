@@ -1,6 +1,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -288,6 +290,10 @@ $(function(){
     type: 'line',
 
     // The data for our dataset
+
+
+
+
     data: {
         labels: ["Segundos"],
         datasets: [{
@@ -323,6 +329,9 @@ $(function(){
         }
       ]
     },
+
+
+    
 
     // Configuration options go here
     options: { 
@@ -429,10 +438,10 @@ axios
         }
     }
     });
-    counter = 1;
+  
     result.reverse().forEach((element) => {
-      chart1.data.labels.push(element.time.hora + counter)
-      counter++
+      chart1.data.labels.push(element.time.hora)
+
       chart1.data.datasets.forEach(dataset => {
         switch (dataset.label) {
         case "Temperatura":
@@ -440,7 +449,7 @@ axios
           if (element.temperatura == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.temperatura);
+            dataset.data.push(Math.round(element.temperatura*100)/100);
           }
           chart1.update();
           break;
@@ -448,7 +457,8 @@ axios
         if (element.humedad == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.humedad);
+            dataset.data.push(Math.round(element.humedad*100)/100);
+            
           }
           chart1.update();
           break;
@@ -456,7 +466,8 @@ axios
         if (element.viento == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.viento);
+            dataset.data.push(Math.round(element.viento*100)/100);
+            
           }
           chart1.update();
           break;
@@ -464,7 +475,8 @@ axios
         if (element.luz == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.luz);
+            dataset.data.push(Math.round(element.luz*100)/100);
+            
           }
           chart1.update();
           break;
@@ -472,7 +484,8 @@ axios
         if (element.presion == null) {
             dataset.data.push(0);
           } else {
-            dataset.data.push(element.presion);
+            dataset.data.push(Math.round(element.presion*100)/100);
+           
           }
           chart1.update();
           break;

@@ -1,6 +1,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -336,37 +338,40 @@
     type: 'bar',
     
     // The data for our dataset
+
+
+
     data: {
         labels: [],
         datasets: [{
             label:  result[0].time.Dia + 5 + "/"+result[0].time.Mes + "/"+result[0].time.anio,
             backgroundColor: 'rgb(255, 0, 0)',
             borderColor: 'rgb(41, 108, 185)',
-            data: [result[0].humedad],
+            data: [Math.round(result[0].humedad*100)/100],
             fill:true,
         },{
             label: result[1].time.Dia + 4 +"/"+result[1].time.Mes + "/"+result[1].time.anio,
             backgroundColor: 'rgb(0, 128, 128))',
             borderColor: 'rgb(41, 128, 185)',
-            data: [result[1].humedad],
+            data: [Math.round(result[1].humedad*100)/100],
             fill: true,
         },{
             label: result[2].time.Dia +3 + "/"+result[2].time.Mes + "/"+result[2].time.anio,
             backgroundColor: 'rgb(0, 0, 128)',
             borderColor: 'rgb(41, 128, 185)',
-            data: [result[2].humedad],
+            data: [Math.round(result[2].humedad*100)/100],
             fill: true,
         },{
             label: result[3].time.Dia + 2 + "/"+result[3].time.Mes + "/"+result[3].time.anio,
             backgroundColor: 'rgb(52, 73, 94)',
             borderColor: 'rgb(41, 128, 185)',
-            data: [result[3].humedad],
+            data: [Math.round(result[3].humedad*100)/100],
             fill: true,
         },{
             label: result[4].time.Dia + 1 + "/"+result[4].time.Mes + "/"+result[4].time.anio,
             backgroundColor: 'rgb(128, 0, 0)',
             borderColor: 'rgb(41, 128, 185)',
-            data: [result[4].humedad],
+            data: [Math.round(result[4].humedad*100)/100],
             fill: true,
         }
       ]
@@ -608,17 +613,16 @@ var ctx1 = document.getElementById('humedaddate').getContext('2d');
   //termina grafica lineal humedad
 
     chartl.data.datasets[0].data.push(0)
-    let counter = 1
+
     result.reverse().forEach(element => {
       console.log(chartl.data.labels);
       if (element.humedad == null) {
         chartl.data.datasets[0].data.push(0)
       }else{
-        chartl.data.datasets[0].data.push(element.humedad)
+        chartl.data.datasets[0].data.push(Math.round(element.humedad*100)/100)
       }
       
-      chartl.data.labels.push(element.time.hora+counter)
-      counter++
+      chartl.data.labels.push(element.time.hora)
       
     });
   //termina grafica de barras de viento
