@@ -8,7 +8,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-  Estación Meteorológica
+  Temperatura
   </title>
   <!--     los inconos y fuentes    -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
@@ -93,20 +93,45 @@
       
       <!-- End Navbar -->
       <div class="content">
+        <div class="contenedor">
+          <div class="widget">
+            <div class="fecha">
+              <p id="diaSemana" class="diaSemana"></p>
+              <p id="dia" class="dia"></p>
+              <p>de</p>
+              <p id="mes" class="mes"></p>
+              <p>del</p>
+              <p id="anio" class="anio"></p>
+              <p>/</p>
+             <p id="hour" class="hour"></p>
+              <p>:</p>
+              <p id="minutos" class="minutos"></p>
+              <p>:</p>
+              <p id="segundos" class="segundos"></p>
+                <p id="ampm" class="ampm"></p>
+               
+            
+           
+          </div>
+        </div>
+        </div>
         <div class="row">
           <h1></h1>
           <div class="col-12">
-          <!--AQUI ESTA EL BOTON -->
-            <form action="">
-              <label for="quantity">Configuración de Alarma:</label>
-              <input type="number" id="rang" name="rang" min="1" max="100">
-              <button onclick="PoneAquiLaFunction()">Establecer Alarma</button>
-             
-            </form> 
-            <!-- HASTA ACA LLEGA EL EVENTO DEL BOTON-->
+           
+         
+           
+           
             <div class="card card-chart">
               <div class="card-header ">
-
+                 <!--AQUI ESTA EL BOTON*************************************************************** -->
+                <form action="">
+                  <label for="quantity">Configuración de Alarma:</label>
+                  <input type="number" id="rang" name="rang" min="1" max="100">
+                  <button onclick="PoneAquiLaFunction()">Establecer Alarma</button>
+                 
+                </form> 
+     <!-- HASTA ACA LLEGA EL EVENTO DEL BOTON************************************************************-->
 
                 
               </div>
@@ -126,6 +151,7 @@
 
           
           <div class="col-lg-12">
+            
             <div class="card card-chart">
 
               
@@ -195,6 +221,8 @@
 
 
       <footer class="footer">
+       
+        
        
         <div class="container-fluid">
           <ul class="nav">
