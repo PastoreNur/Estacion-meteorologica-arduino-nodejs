@@ -99,7 +99,7 @@
         <div class="contenedor">
           <h5>Alarma Configurada en:</h5>
           <!--ESTO ES EL LABEL DONDE TOMARA EL VALOR DE LA ALARMA-->
-          <span class="label danger">valor alarma</span>  
+          <span class="label danger" id="Valoralarma">Valor</span>  
           <!--FIN VALOR DE LA ALARMA-->
 
 <style type="text/css">
@@ -310,6 +310,18 @@
 
   
   <script>
+
+axios.get('http://localhost:3000/mostraralarma')
+    .then(function (response) {      
+      console.log(response.data+"C°");
+      document.getElementById("Valoralarma").textContent = ""+response.data+"C°";
+    })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    return null
+  });
+  
 function fijaralerta() {
   let ctxb = document.getElementById("rang").value;
   axios.get('http://localhost:3000/cambiaralerta/'+ctxb)
