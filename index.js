@@ -8,6 +8,7 @@ const Delimiter = require("@serialport/parser-delimiter");
 const jsoncon = require("./jsoncontroller.js");
 const token = "836236541:AAEEIvAQW-ADQC45A1c9wjyCdAZJt9MAqR8";
 const bot = new Telegraf(token);
+const config = require("./config.json");
 const app = express();
 const server = http.createServer(app);
 const io = socketIo.listen(server);
@@ -74,7 +75,7 @@ parser2.on("data", function (data) {
   io.emit("arduino:data", { value: entrada });
   jsoncon.escribir(entrada);
 
-  if (entrada.temperatura >= 5.6 && unico) {
+  if (entrada.temperatura >= config.alarma && unico) {
     bot.telegram.sendMessage(
       308594558,
       "Alerta de temperatura " + entrada.temperatura + "C°"
