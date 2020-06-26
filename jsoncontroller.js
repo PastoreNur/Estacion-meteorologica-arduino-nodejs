@@ -26,6 +26,10 @@ function buscarfecha(params) {
   return porfecha;
 }
 
+function mostraralarma() {
+  return config.alarma;
+}
+
 function cambiaralerta(params) {
   config.alarma = params.alarma;
   console.log(config);
@@ -230,4 +234,5 @@ module.exports = {
   registro,
   registrohora,
   cambiaralerta,
+  mostraralarma,
 };

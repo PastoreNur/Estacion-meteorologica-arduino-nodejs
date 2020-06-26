@@ -92,7 +92,9 @@ app.get("/", (req, res, next) => {
 app.get("/promediofecha/:Dia/:Mes/:anio", (req, res) => {
   res.json(jsoncon.promediofecha(req.params));
 });
-
+app.get("/mostraralarma/", (req, res) => {
+  res.json(jsoncon.mostraralarma());
+});
 app.get("/promedioRango/:Diai/:Mesi/:anioi/:Diaf/:Mesf/:aniof", (req, res) => {
   res.json(jsoncon.promediorango(req.params));
 });
