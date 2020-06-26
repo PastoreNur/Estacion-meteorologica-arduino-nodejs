@@ -151,9 +151,6 @@
             </div>
           </div>
 
-
-
-
           <div class="col-lg-12">
             <div id="rangoluminoso"  style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50%">
               <i class="fa fa-calendar"></i>&nbsp;
@@ -167,7 +164,7 @@
               </div>
               <div class="card-body">
                 <div class="chart-area">
-                  <canvas id="luminosodate"></canvas>
+                  <canvas id="luminosadate"></canvas>
                 </div>
               </div>
             </div>
@@ -389,6 +386,75 @@ var end = moment();
 
 function cb(start, end) {
     $('#rangoluminoso span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    //GRAFICA DEL DATEPICKER
+console.log(start.format('DD/MM/YYYY'));
+    axios.get('http://localhost:3000/promedioRango/'+start.format('MM/DD/YYYY')+"/"+end.format('MM/DD/YYYY'))
+    .then(function (response) {
+    // handle success
+      console.log(response.data);
+      let result = response.data;
+      var ctxt = document.getElementById('luminosadate').getContext('2d');
+      var chartt = new Chart(ctxt, {
+      // The type of chart we want to create
+      type: 'line',
+
+      // The data for our dataset
+      data: {
+          labels: ["Horas"],
+          datasets: [{
+              label: "",
+              backgroundColor: 'rgb(128, 0, 0)',
+              borderColor: 'rgb(41, 108, 105)',
+              data: [0],
+              fill:true,
+          }
+        ]
+      },
+        // Configuration options go here
+        options: { 
+          legend: {
+              labels: {
+                  fontColor: "white",
+                
+              }
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      fontColor: "white",
+                      
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                      fontColor: "white",
+                    
+                  }
+              }]
+          }
+      }
+      });
+      
+      
+      result.reverse().forEach(element => {
+        chartt.data.labels.push(element.time.Dia + "/" + element.time.Mes + "/" + element.time.anio);
+        if (element.luz == null ) {
+          chartt.data.datasets[0].data.push(0);
+        }else{
+          chartt.data.datasets[0].data.push(element.luz);        
+        }
+      });
+      console.log(chartt.data.labels);
+  //FIN DE LA GRAFICA DEL DATEPICKER
+      chartt.update();
+      
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    return null
+  });   
+
 }
 
 $('#rangoluminoso').daterangepicker({
@@ -411,57 +477,6 @@ cb(start, end);
 
 
 //FIN DEL DATEPICKER**************************
-//GRAFICA DEL DATEPICKER
-
-var ctx1 = document.getElementById('luminosodate').getContext('2d');
-   var chart1 = new Chart(ctx1, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ["Horas"],
-        datasets: [{
-            label: "",
-            backgroundColor: 'rgb(128, 0, 0)',
-            borderColor: 'rgb(41, 108, 105)',
-            data: [0],
-            fill:true,
-        }
-      ]
-    },
-       // Configuration options go here
-       options: { 
-        legend: {
-            labels: {
-                fontColor: "white",
-               
-            }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "white",
-                    
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: "white",
-                  
-                }
-            }]
-        }
-    }
-    });
- 
-
-//FIN DE LA GRAFICA DEL DATEPICKER
-
-
-
-
-
 
 
     chart1.data.datasets[0].data.push(0)

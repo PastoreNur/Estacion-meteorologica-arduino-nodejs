@@ -180,10 +180,26 @@ function promediorango(rango) {
   final.Dia = rango.Mesf;
   final.Mes = rango.Diaf;
   final.anio = rango.aniof;
+  let fechai = new Date(inicial.anio, inicial.Mes, inicial.Dia);
+  let fechaf = new Date(final.anio, final.Mes, final.Dia);
+  let fecha = fechai;
+  const diffTime = Math.abs(fechai - fechaf);
+  let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  console.log(diffDays);
 
-  console.log(promediofecha(inicial));
-
+  Date.prototype.addDays = function (days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+  };
   var retorno = [];
+  for (let index = 0; index < diffDays; index++) {
+    let it = {};
+    it.Dia = fecha.addDays(index).getDate();
+    it.Mes = fecha.addDays(index).getMonth();
+    it.anio = fecha.addDays(index).getFullYear();
+    retorno.push(promediofecha(it));
+  }
 
   return retorno;
 }

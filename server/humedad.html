@@ -330,56 +330,7 @@
     return null
   });
   
-
-  axios.get('http://localhost:3000/registrohora')
-    .then(function (response) {
-    // handle success
-    let result= response.data
-    console.log(result);
-  //GRAFICA LINEAL 3 DE HUMEDAD
-   var ctx1 = document.getElementById('linealhumedad').getContext('2d');
-   var chart1 = new Chart(ctx1, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ["Horas"],
-        datasets: [{
-            label: "",
-            backgroundColor: 'rgb(128, 0, 0)',
-            borderColor: 'rgb(41, 108, 105)',
-            data: [0],
-            fill:true,
-        }
-      ]
-    },
-    // Configuration options go here
-    options: { 
-        legend: {
-            labels: {
-                fontColor: "white",
-               
-            }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "white",
-                    
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: "white",
-                  
-                }
-            }]
-        }
-    }
-    });
-  //termina grafica lineal humedad
-
+  
 
 //AQUÍ EL SCRIPT DEL DATE PICKER**************
 
@@ -391,6 +342,72 @@ var end = moment();
 
 function cb(start, end) {
     $('#rangohumedad span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    axios.get('http://localhost:3000/promedioRango/'+start.format('MM/DD/YYYY')+"/"+end.format('MM/DD/YYYY'))
+    .then(function (response) {
+    // handle success
+      console.log(response.data);
+      let result = response.data;
+      var ctxt = document.getElementById('humedaddate').getContext('2d');
+      var chartt = new Chart(ctxt, {
+      // The type of chart we want to create
+      type: 'line',
+
+      // The data for our dataset
+      data: {
+          labels: ["Horas"],
+          datasets: [{
+              label: "",
+              backgroundColor: 'rgb(128, 0, 0)',
+              borderColor: 'rgb(41, 108, 105)',
+              data: [0],
+              fill:true,
+          }
+        ]
+      },
+        // Configuration options go here
+        options: { 
+          legend: {
+              labels: {
+                  fontColor: "white",
+                
+              }
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      fontColor: "white",
+                      
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                      fontColor: "white",
+                    
+                  }
+              }]
+          }
+      }
+      });
+      
+      
+      result.reverse().forEach(element => {
+        chartt.data.labels.push(element.time.Dia + "/" + element.time.Mes + "/" + element.time.anio);
+        if (element.humedad == null ) {
+          chartt.data.datasets[0].data.push(0);
+        }else{
+          chartt.data.datasets[0].data.push(element.humedad);        
+        }
+      });
+      console.log(chartt.data.labels);
+  //FIN DE LA GRAFICA DEL DATEPICKER
+      chartt.update();
+  
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    return null
+  });  
 }
 
 $('#rangohumedad').daterangepicker({
@@ -465,22 +482,72 @@ var ctx1 = document.getElementById('humedaddate').getContext('2d');
 
 
 
-    chart1.data.datasets[0].data.push(0)
-    counter = 1
+
+  axios.get('http://localhost:3000/registrohora')
+    .then(function (response) {
+    // handle success
+    let result= response.data
+    console.log(result);
+  //GRAFICA LINEAL 3 DE HUMEDAD
+   var ctxl = document.getElementById('linealhumedad').getContext('2d');
+   var chartl = new Chart(ctxl, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["Horas"],
+        datasets: [{
+            label: "",
+            backgroundColor: 'rgb(128, 0, 0)',
+            borderColor: 'rgb(41, 108, 105)',
+            data: [0],
+            fill:true,
+        }
+      ]
+    },
+    // Configuration options go here
+    options: { 
+        legend: {
+            labels: {
+                fontColor: "white",
+               
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor: "white",
+                    
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    fontColor: "white",
+                  
+                }
+            }]
+        }
+    }
+    });
+  //termina grafica lineal humedad
+
+    chartl.data.datasets[0].data.push(0)
+    let counter = 1
     result.reverse().forEach(element => {
-      console.log(chart1.data.labels);
+      console.log(chartl.data.labels);
       if (element.humedad == null) {
-        chart1.data.datasets[0].data.push(0)
+        chartl.data.datasets[0].data.push(0)
       }else{
-        chart1.data.datasets[0].data.push(element.humedad)
+        chartl.data.datasets[0].data.push(element.humedad)
       }
       
-      chart1.data.labels.push(element.time.hora+counter)
+      chartl.data.labels.push(element.time.hora+counter)
       counter++
       
     });
   //termina grafica de barras de viento
-  chart1.update()
+  chartl.update()
   })
   .catch(function (error) {
     // handle error

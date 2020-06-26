@@ -454,6 +454,75 @@ var end = moment();
 
 function cb(start, end) {
     $('#rangoviento span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    //GRAFICA DEL DATEPICKER
+    axios.get('http://localhost:3000/promedioRango/'+start.format('MM/DD/YYYY')+"/"+end.format('MM/DD/YYYY'))
+    .then(function (response) {
+    // handle success
+      console.log(response.data);
+      let result = response.data;
+
+      var ctxt = document.getElementById('vientodate').getContext('2d');
+      var chartt = new Chart(ctxt, {
+      // The type of chart we want to create
+      type: 'line',
+
+      // The data for our dataset
+      data: {
+          labels: ["Horas"],
+          datasets: [{
+              label: "",
+              backgroundColor: 'rgb(128, 0, 0)',
+              borderColor: 'rgb(41, 108, 105)',
+              data: [0],
+              fill:true,
+          }
+        ]
+      },
+        // Configuration options go here
+        options: { 
+          legend: {
+              labels: {
+                  fontColor: "white",
+                
+              }
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      fontColor: "white",
+                      
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                      fontColor: "white",
+                    
+                  }
+              }]
+          }
+      }
+      });
+      
+      
+      result.reverse().forEach(element => {
+        chartt.data.labels.push(element.time.Dia + "/" + element.time.Mes + "/" + element.time.anio);
+        if (element.viento == null ) {
+          chartt.data.datasets[0].data.push(0);
+        }else{
+          chartt.data.datasets[0].data.push(element.viento);        
+        }
+      });
+      console.log(chartt.data.labels);
+  //FIN DE LA GRAFICA DEL DATEPICKER
+      chartt.update();
+  
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    return null
+  });   
+
 }
 
 $('#rangoviento').daterangepicker({
@@ -476,59 +545,6 @@ cb(start, end);
 
 
 //FIN DEL DATEPICKER**************************
-//GRAFICA DEL DATEPICKER
-
-var ctx1 = document.getElementById('vientodate').getContext('2d');
-   var chart1 = new Chart(ctx1, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ["Horas"],
-        datasets: [{
-            label: "",
-            backgroundColor: 'rgb(128, 0, 0)',
-            borderColor: 'rgb(41, 108, 105)',
-            data: [0],
-            fill:true,
-        }
-      ]
-    },
-       // Configuration options go here
-       options: { 
-        legend: {
-            labels: {
-                fontColor: "white",
-               
-            }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "white",
-                    
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontColor: "white",
-                  
-                }
-            }]
-        }
-    }
-    });
- 
-
-//FIN DE LA GRAFICA DEL DATEPICKER
-
-
-
-
-
-
-
 
 
   let counter = 0 ;

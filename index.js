@@ -1,12 +1,14 @@
 const express = require("express");
 const socketIo = require("socket.io");
 const http = require("http");
+var telegram = require("telegram-bot-api");
 const SerialPort = require("serialport");
 const Delimiter = require("@serialport/parser-delimiter");
 const jsoncon = require("./jsoncontroller.js");
-const { dirname } = require("path");
-const { Socket } = require("dgram");
-
+const token = "836236541:AAEEIvAQW-ADQC45A1c9wjyCdAZJt9MAqR8";
+var api = new telegram({
+  token: token,
+});
 const app = express();
 const server = http.createServer(app);
 const io = socketIo.listen(server);
@@ -62,9 +64,15 @@ parser2.on("data", function (data) {
     };
   }
 
-  console.log(entrada);
   io.emit("arduino:data", { value: entrada });
   jsoncon.escribir(entrada);
+
+  if (entrada.temperatura >= 5.6) {
+    api.sendMessage({
+      chat_id: "308594558",
+      text: "Alerta de temperatura " + entrada.temperatura + "C°",
+    });
+  }
 });
 
 app.use(express.static(__dirname + "/server/recursos"));
