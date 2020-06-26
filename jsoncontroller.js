@@ -1,5 +1,6 @@
 const fs = require("fs");
 const entradas = require("./entradas.json");
+const config = require("./config.json");
 const { time } = require("console");
 function escribir(params) {
   entradas.push(params);
@@ -23,6 +24,15 @@ function buscarfecha(params) {
 
   //Retorna un arreglo de las concidencias almacenadas
   return porfecha;
+}
+
+function cambiaralerta(params) {
+  config.alarma = params.alarma;
+  console.log(config);
+
+  fs.writeFile("./config.json", JSON.stringify(params), (err) => {
+    if (err) console.log("Error writing file:", err);
+  });
 }
 
 //Parametro debe ser un objeto con las propiedades Dia,Mes,anio
@@ -219,4 +229,5 @@ module.exports = {
   promediorango,
   registro,
   registrohora,
+  cambiaralerta,
 };

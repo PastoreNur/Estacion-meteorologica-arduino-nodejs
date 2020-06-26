@@ -128,7 +128,7 @@
                 <form action="">
                   <label for="quantity">Configuración de Alarma:</label>
                   <input type="number" id="rang" name="rang" min="1" max="100">
-                  <button onclick="PoneAquiLaFunction()">Establecer Alarma</button>
+                  <button onclick="fijaralerta()">Establecer Alarma</button>
                  
                 </form> 
      <!-- HASTA ACA LLEGA EL EVENTO DEL BOTON************************************************************-->
@@ -281,7 +281,18 @@
 
   
   <script>
+function fijaralerta() {
+  let ctxb = document.getElementById("rang").value;
+  axios.get('http://localhost:3000/cambiaralerta/'+ctxb)
+  .then(function (response) {
 
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    return null
+  })
+}
   //SCRIPT RELOJ
 $(function(){
   var actualizarHora = function(){

@@ -104,6 +104,11 @@ app.get("/registrohora", (req, res) => {
   res.json(jsoncon.registrohora());
 });
 
+app.get("/cambiaralerta/:alarma", (req, res) => {
+  console.log(req.params);
+  res.json(jsoncon.cambiaralerta(req.params));
+});
+
 app.get("/temperatura.html", (req, res, next) => {
   res.sendFile(__dirname + "/server/temperatura.html");
 });
