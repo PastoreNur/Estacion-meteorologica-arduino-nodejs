@@ -81,9 +81,11 @@
      <!-- PANEL PEINCIPAL -->
 
     <div class="main-panel">
+      
      
       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
         <div class="container-fluid">
+          
           <div class="navbar-wrapper">
           <div class="collapse navbar-collapse" id="navigation">
           </div>
@@ -93,7 +95,27 @@
       
       <!-- End Navbar -->
       <div class="content">
+        
         <div class="contenedor">
+          <h5>Alarma Configurada en:</h5>
+          <!--ESTO ES EL LABEL DONDE TOMARA EL VALOR DE LA ALARMA-->
+          <span class="label danger">valor alarma</span>  
+          <!--FIN VALOR DE LA ALARMA-->
+
+<style type="text/css">
+
+.label {
+  color: white;
+  padding: 8px;
+}
+
+.danger {background-color: #f44336;} /* Red */
+
+</style>
+
+
+
+
           <div class="widget">
             <div class="fecha">
               <p id="diaSemana" class="diaSemana"></p>
@@ -128,10 +150,17 @@
                 <form action="">
                   <label for="quantity">Configuración de Alarma:</label>
                   <input type="number" id="rang" name="rang" min="1" max="100">
-                  <button onclick="fijaralerta()">Establecer Alarma</button>
+                 
+                  <button onclick="fijaralerta()" class="btn btn-light">Establecer Alarma</button>
+             
                  
                 </form> 
      <!-- HASTA ACA LLEGA EL EVENTO DEL BOTON************************************************************-->
+  
+
+
+
+
 
                 
               </div>
