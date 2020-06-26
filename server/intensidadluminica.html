@@ -496,11 +496,11 @@ cb(start, end);
       if (element.humedad == null) {
         chart1.data.datasets[0].data.push(0)
       }else{
-        chart1.data.datasets[0].data.push(element.luz)
+        chart1.data.datasets[0].data.push(Math.round(element.luz*100)/100)
       }
       
-      chart1.data.labels.push(element.time.hora+counter)
-      counter++
+      chart1.data.labels.push(element.time.hora)
+  
       
     });
     chart1.update()

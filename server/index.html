@@ -349,10 +349,10 @@ axios
         }
     }
     });
-    counter = 1;
+  
     result.reverse().forEach((element) => {
-      chart1.data.labels.push(element.time.hora + counter)
-      counter++
+      chart1.data.labels.push(element.time.hora)
+
       chart1.data.datasets.forEach(dataset => {
         switch (dataset.label) {
         case "Temperatura":
