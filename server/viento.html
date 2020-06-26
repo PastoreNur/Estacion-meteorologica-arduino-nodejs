@@ -216,11 +216,6 @@
     <!--FIN PANEL PRINCIPAL-->
 
   
- 
-
-
-
-
   <!--   Core JS Files   -->
   <script src="js/core/jquery.min.js"></script>
   <script src="js/core/popper.min.js"></script>
@@ -302,9 +297,6 @@
       ]
     },
 
-
-
-    
 
     // Configuration options go here
     options: { 
@@ -519,7 +511,7 @@ function cb(start, end) {
         if (element.viento == null ) {
           chartt.data.datasets[0].data.push(0);
         }else{
-          chartt.data.datasets[0].data.push(element.viento);        
+          chartt.data.datasets[0].data.push(Math.round(element.viento*100)/100);        
         }
       });
       console.log(chartt.data.labels);

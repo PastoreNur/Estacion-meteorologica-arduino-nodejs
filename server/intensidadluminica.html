@@ -451,7 +451,7 @@ console.log(start.format('DD/MM/YYYY'));
         if (element.luz == null ) {
           chartt.data.datasets[0].data.push(0);
         }else{
-          chartt.data.datasets[0].data.push(element.luz);        
+          chartt.data.datasets[0].data.push(Math.round(element.luz*100)/100);        
         }
       });
       console.log(chartt.data.labels);

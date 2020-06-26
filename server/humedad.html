@@ -400,7 +400,7 @@ function cb(start, end) {
         if (element.humedad == null ) {
           chartt.data.datasets[0].data.push(0);
         }else{
-          chartt.data.datasets[0].data.push(element.humedad);        
+          chartt.data.datasets[0].data.push(Math.round(element.humedad*100)/100);        
         }
       });
       console.log(chartt.data.labels);
