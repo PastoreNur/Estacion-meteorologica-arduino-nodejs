@@ -1,22 +1,29 @@
 const express = require("express");
 const socketIo = require("socket.io");
 const http = require("http");
-var telegram = require("telegram-bot-api");
+const Telegraf = require("telegraf");
+const Telegram = require("telegraf/telegram");
 const SerialPort = require("serialport");
 const Delimiter = require("@serialport/parser-delimiter");
 const jsoncon = require("./jsoncontroller.js");
 const token = "836236541:AAEEIvAQW-ADQC45A1c9wjyCdAZJt9MAqR8";
-var api = new telegram({
-  token: token,
-});
+const bot = new Telegraf(token);
 const app = express();
 const server = http.createServer(app);
 const io = socketIo.listen(server);
 const port = new SerialPort("COM5", {
   baudRate: 9600,
 });
+var unico = true;
 
 const parser2 = port.pipe(new Delimiter({ delimiter: "\r" }));
+
+bot.on("text", (ctx) => {
+  if (ctx.message.text == "/ok") {
+    unico = true;
+    ctx.reply("Alerta reactivada");
+  }
+});
 
 port.on("open", function () {
   console.log("Puerto abierto");
@@ -67,14 +74,15 @@ parser2.on("data", function (data) {
   io.emit("arduino:data", { value: entrada });
   jsoncon.escribir(entrada);
 
-  if (entrada.temperatura >= 5.6) {
-    api.sendMessage({
-      chat_id: "308594558",
-      text: "Alerta de temperatura " + entrada.temperatura + "C°",
-    });
+  if (entrada.temperatura >= 5.6 && unico) {
+    bot.telegram.sendMessage(
+      308594558,
+      "Alerta de temperatura " + entrada.temperatura + "C°"
+    );
+    unico = false;
   }
 });
-
+bot.launch();
 app.use(express.static(__dirname + "/server/recursos"));
 app.use("/static", express.static(__dirname));
 app.get("/", (req, res, next) => {
